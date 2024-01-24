@@ -129,9 +129,33 @@ $C_{i} = F_{i}(p)$
 
 
 
-CNNs는 
+CNNs는 2D필터를 사용하여 입력 이미지의 공간 의존성 관련 객체 분포(spatial dependency-related object distribution)를 성공적으로 capture.
+
+따라서 density map을 생성하는데 훈련시키며, 원근 왜곡을 포함한 다양한 scene에서 객체 분포 특징을 추출하는데 탁월한 성능을 보여 crowd counting에 CNN 기반 접근 방식이 제안됐다.
+
+end-to-end 훈련기반 네트워크 아키텍쳐인 CSRNet이 backbone으로 사용됐다.
+
+CSRNet은 다른 최신 모델에 비해, 아키텍쳐가 단순하고 훈련가능한 파라미터가 상대적으로 적으며 인코더와 디코더 구조가 명확하기때문에 DANN의 adversarial training method 적용이 쉽다.
 
 
+
+네트워크 구성
+
+![스크린샷 2024-01-24 오후 2.44.32](/images/2024-01-20-domain_adapted/스크린샷 2024-01-24 오후 2.44.32.png)
+
+
+
+Front-end 
+
+- 13 VGG-16 layer
+- same kernel size (3 x 3) with depth of 64, 128, 256, 512
+- Max pooling (2x2, stride 2)
+
+Back-end 
+
+- 7 pure convolutional layers
+
+- 
 
 
 
