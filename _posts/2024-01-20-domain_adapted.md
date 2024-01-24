@@ -148,21 +148,54 @@ CSRNet은 다른 최신 모델에 비해, 아키텍쳐가 단순하고 훈련가
 
 <img src="/images/2024-01-20-domain_adapted/스크린샷 2024-01-24 오후 2.44.32-6075743.png" alt="스크린샷 2024-01-24 오후 2.44.32" style="zoom:80%;" />
 
+![image-20240124151404160](/images/2024-01-20-domain_adapted/image-20240124151404160.png)
 
 
-Front-end 
+
+> Front-end 
 
 - 13 VGG-16 layer
 - same kernel size (3 x 3) with depth of 64, 128, 256, 512
 - Max pooling (2x2, stride 2)
 
-Back-end 
+>  Back-end 
 
 - 7 pure convolutional layers
 - 드물게 dilated kernel(확장된 커널)을 가진다.
 - dilated kernel은 filter size를 dilated stride로 확대된다.
 
 $y(m,n) = \sum_{i,j \in I}x(m + r \times i, n + r \times j)w(i,j)$
+
+$y(m,n)은 입력 $x(m,n)과 필터 $w(i,j) 의 dilated convolution form이다.
+
+$r$ 은 dilation rate이다.
+
+ `-> pooling effect with out spatial resolution reductiokn during the convolution process `
+
+`-> significant performance improvement for feature extraction `
+
+
+
+### 2.2 Domain adversarial neural networks(DANN)
+
+
+
+DANN은 신경망 기반으로  간단한 수정만으로 쉽게 구현할 수 있으며, 특정 작업을 작업 도메인에 맞게 독립적으로 수정할 수 있는 것이 특징이다.
+
+DANN은 일반적인 피드포워드 아키텍쳐에 특징 추출기와 분류기를 포함한 도메인 판별기가 추가된 복합 구성이다.
+
+분류기는 특징 추출기의 출력 벡터를 사용하여 소스 도메인에서 샘플의 클래스 레이블을 예측하고, 레이블이 지정된 데이터로 학습한다. 
+
+도메인 판별기 역시 특징 추출기의 마지막 레이어에서 표현 벡터를 가져오지만, 전체 데이터(소스 도메인과 타깃 도메인)를 대상으로 학습하고 클래스 라벨이 아닌 샘플의 출처가 소스 도메인인지 타깃 도메인인지 판별한다. 
+
+`DANN main idea`
+
+`훈련 단계에서 라벨 예측 손실($Ly$)을 최소화, 도메인 판별 손실($Ld$)을 최대화하여 deep feature mapping을 위한 파라미터를 최적화. `
+
+입력의 클래스 레이블을 정확하게 판별하고 입력의 출처를 무차별적으로 판별할 수 있는 특징을 도메인에서 독립적으로 표현하고 이러한 적대적 학습을 통해 장려할 수 있습니다. 
+후자의 비차별성은 소스 도메인과 타깃 도메인에 대한 특징 분포의 불일치가 최소화되어 소스 도메인 데이터에서 학습한 모델이라도 타깃 도메인 데이터 분포에서도 잘 작동할 수 있다는 것을 의미합니다. 
+적대적 훈련을 구현하기 위해 DANN은 특징 추출기와 도메인 판별기 사이에 역전파 단계에서만 작동하는 그라데이션 반전 레이어를 사용했습니다. 
+이 단일 레이어의 간단한 기능은 그라디언트 방향을 반대로 변경하는 것으로, 매개변수 Ld를 업데이트합니다.
 
 
 
