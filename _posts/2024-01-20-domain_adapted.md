@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[Paper review] Domain adapted broiler density map estimation using negative-patch data augmentation"
+title: "[Paper Review] Domain adapted broiler density map estimation using negative-patch data augmentation"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
@@ -172,7 +172,7 @@ $r$ 은 dilation rate이다.
 
 
 
-### 2.2 Domain adversarial neural networks(DANN)
+### **2.2 Domain adversarial neural networks(DANN)**
 
 
 
@@ -307,7 +307,7 @@ NP에는 두가지 유형이 있는데 NP-p와 NP-f 이다.
 
 
 
-### 3.2 Performance evaluation
+### **3.2 Performance evaluation**
 
 
 
@@ -343,9 +343,9 @@ density map quality - using standard method:PSNR
 
 > peple crowd dataset 비교
 
-## 4. Results and discussion
+## **4. Results and discussion**
 
-### 4.1 Model training
+### **4.1 Model training**
 
 <br>
 
@@ -369,7 +369,7 @@ DANN 손실 곡선은 처음부터 급격한 증가를 보였으며, 해당 논�
 
 
 
-### 4.2 Density map estimation of broiler flock
+### **4.2 Density map estimation of broiler flock**
 
 ![image-20240124220535145](/images/2024-01-20-domain_adapted/image-20240124220535145.png)
 
@@ -380,6 +380,94 @@ NP size에 대한 estimation을 봤을 때, NP 20% 일 때 MAE, MARE가 가장 �
 모든 지표에서 20% NP size가 가장 좋은 성능을 보였기때문에 다른 시험에서도 20% NP를 수행했다.
 
 ![image-20240124221920687](/images/2024-01-20-domain_adapted/image-20240124221920687.png)
+
+> Fig8 Estimated density maps using various methods. The results of 10 sets are expressed in 10 columns, and each result set is composed of 7 rows comprising images depicting the test image, ground truth, the results obtained via 5 methods: Baseline, SL, DANN, DANN + NP-p, and DANN + NP-f. The number at the bottom right of each image indicates the number of broiler counts.
+
+오른쪽 아래의 숫자는 추정된 육계 수의 측정값과 예측값을 나타낸다.
+
+SL : 소규모 레이블이 지정된 데이터 세트를 사용하기때문에 쉡게 과적합되며 밀도 맵 품질이 낮다.
+
+DANN : 육계 수에 따라 성능에 차이가 있다.
+
+DANN의 9번 10번 샘플을 볼때, background에 높은 밀도를 나타내는 오류가 발생한다.
+
+이러한 에러는 이질적인 도메인때문에 일어나는데, 이는 DANN이 사람머리와 톱밥을 구분하지 않고 소스 도메인 데이터 세트에 맞게 모델을 학습시켰음을 나타낸다.
+
+반면 NP 방법을 사용한 DANN은 SL과 DANN 보다 높은 품질의 밀도 맵을 생성할 수 있다.
+
+또한 NP는 이미지에서 육계 수를 예측하는 DANN의 정확도를 높이는 데 기여했다.
+
+
+
+### **4.3 Performances comparison of broiler counting**
+
+Table 2. Comparison of the broiler flock density prediction by the learning method.
+
+| Method      | MAE    | MRAE | MSE    | PSNR (dB) |
+| ----------- | ------ | ---- | ------ | --------- |
+| Baseline    | 142.30 | 5.77 | 120.29 | 4.88      |
+| SL          | 64.89  | 0.26 | 140.96 | 5.83      |
+| DANN        | 148.28 | 4.73 | 143.03 | 5.29      |
+| DANN + NP-p | 80.11  | 0.70 | 112.94 | 5.12      |
+| DANN + NP-f | 55.36  | 0.36 | 113.50 | 5.67      |
+
+MAE : 측정된 육계수와 예측 육계수의 절대적인 차이
+
+MRAE : 측정된 육계수에 대한 상대적인 MAE
+
+MSE : 모델 학습 시 밀도 예측 손실로 사용되며, 밀도 맵의 공간 오차 한계를 평균화하여 계산 
+
+MAE를에서 DANN이 제일 높은 값을 보였지만, DANN에 NP를 적용한 값은 55.36까지 떨어졌다.
+
+특히, DANN + NP-f의 경우 SL의 보다 낮은 MAE를 보이며 가장 좋은 점수를 보였는데 이는 DANN의 MAE의 37% 수준이다.
+
+또한 NP-f  DANN의 MRAE를 90%까지 줄일 수 있다.
+
+MSE는 밀도 맵 생성의 정확도와 관련이 있는데, SL과 DANN보다 DANN + NP 방식에서 낮은 값을 보였다.
+
+
+
+![image-20240125023640627](/images/2024-01-20-domain_adapted/image-20240125023640627.png)
+
+> Fig. 9. Relationships between estimated and measured counts in broiler flock images. Linear regressions were represented using the entire test set (left column), and excluding the top 5 broiler count samples from the test set (right column).
+
+ DANN + NP 방법을 통해 얻은 예측된 육계 수는 실측 데이터에서 측정된 실제 육계 수와 좋은 관계를 보였다. 
+
+DANN +NP 의 선형 상관관계는 테스트 세트의 37개 샘플 모두에서 약 0.87-0.89의 범위 R2를 보였으며, R2 값은 다른 방법의 128-198%에 달했다. 
+
+대부분의 이미지가 300개 미만이므로 그림의 오른쪽 열에 표시된 것처럼 육계 수가 가장 많은 상위 5개 샘플을 제외한 32개의 테스트 이미지를 사용하여 선형 회귀를 다시 수행했다.
+
+그 결과, 모든 테스트 이미지를 사용했을 때와 동일하게 DANN + NP-f의 R2가 계산된 반면, DANN + NP-p의 R2는 0.77로 감소했다. 
+
+SL 방법은 0.97의 R2로 육계 수를 예측할 수 있어 가장 높은 성능을 보였으며, DANN의 경우 0.06으로 선형성이 거의 없는 것으로 나타나 가장 낮은 R2를 나타냈다. 
+
+이러한 결과는 제안된 NP 전략이 사람 수 세기에 대한 지식을 육계 수 세기로 옮기기 위한 DANN 기반 도메인 적응을 성공적으로 지원할 수 있음을 보여준다.
+
+
+
+<font color = 'red'> **연구에서 사용한 네 가지 도메인 적응 방법 모두에서 NP 접근법이 유의미한 우위를 보였으며, 이는 제안한 방법이 다양한 DA 방법에 공통적으로 적용될 수 있는 잠재력을 가지고 있음을 보인다.**</font>
+
+
+
+## 5. Conclusion
+
+### **Summary**
+
+- 본 연구에서는 이종 도메인 간의 도메인 적응 성능을 향상시키기 위해 NP 데이터 증강 전략을 제안
+- 육계 무리 밀도 추정에 대한 DANN에 NP 전략을 적용하여 검정을 실시했다.
+- 농업 분야에서 라벨링된 데이터의 부족을 극복하기 위해 라벨링된 이미지로 구성된 사람들의 군중 데이터 세트를 소스 도메인 데이터 세트로 사용하고 라벨링되지 않은 이미지로 구성된 육계 데이터 세트를 타겟 도메인 데이터 세트로 사용
+- 딥러닝 모델과 도메인 적응 방법을 위한 백본 아키텍처로 CSRNet과 DANN이 각각 사용
+- 5가지 학습방법을 이용하여 밀도추정을 바탕으로 영상 내 육계의 수를 계수하였고, 육계 데이터셋의 테스트 영상을 이용하여 방법의 성능을 비교 
+- 밀도 맵 추정에서는 DANN에 NP 데이터 증강을 추가하면 도메인 불변 특성을 학습하여 객체 분포에 맞게 소스 도메인과 타겟 도메인 모두에서 밀도 맵을 정확하게 예측한 반면, DANN만으로 모델을 학습시켰을 때 일부 샘플에서는 밀도 맵이 잘못 예측.
+- 다양한 피플 크라우드 데이터 세트를 적용하여 실험을 통해 일반화된 성능을 입증
+- 특히 NP-f는 소스 영상에서 배경뿐만 아니라 사람들이 모여 있는 영역을 공유해 배경을 담은 다양한 데이터셋을 생성하여 최상의 성능
+- NP-p는 모델 훈련 시 지상진도의 재생과 자동적인 구현이 필요하지 않아 실용적인 측면에서 장점
+
+### **Limitation**
+
+1. annotation inaccuracies : validation set과 test set의 broiler congested regions에서의 annotation 부정확성, 성능 저하
+
+2. target domain set을 source domain set 수준까지는 높이지 못함
 
 
 
