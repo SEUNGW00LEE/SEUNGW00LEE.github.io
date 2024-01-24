@@ -72,10 +72,15 @@ use_math: true
 
 
 - Density based counting method는 최근(2019)년에 양돈장의 돼지 수를 세는데 적용 <- 대규모 농업 생산 관리를 위해
+
 -  Counting CNN model 을 기반으로 수정된 모델을 통해, 실제 환경에서 직접 수집하고 웹에서 다운로드한 데이터로 돼지 수를 예측
+
   - 373 image를 사용한 supervised learning, image당 평균 돼지 수는 약 15마리로 각 객체의 라벨링은 어렵지 않음.
-  - --> MAE = 2.78 : 이전 crowd counting 연구와 비슷
+
+    --> MAE = 2.78 : 이전 crowd counting 연구와 비슷
+
 - 그러나 일반적 육계 모니터링은 한 이미지에 최소 수백마리로, 일부 육계는 구분할 수 없음
+
   - 이러한 육계 이미지에 라벨링된 데이터 세트를 구축하는것은 사실상 불가능
 
 
