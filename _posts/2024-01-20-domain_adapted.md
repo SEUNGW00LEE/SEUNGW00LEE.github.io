@@ -345,8 +345,17 @@ density map quality - using standard method:PSNR
 
 ## 4. Results and discussion
 
+### 4.1 Model training
 
-
-
+<br>
 
 ![image-20240124174318953](/images/2024-01-20-domain_adapted/image-20240124174318953.png)
+
+> Fig. 6. Density prediction losses (left) and accuracies of domain discriminator (right) during model training.
+
+<br>
+
+### 
+
+
+
