@@ -144,9 +144,9 @@ CSRNet은 다른 최신 모델에 비해, 아키텍쳐가 단순하고 훈련가
 
 
 
-네트워크 구성
+**네트워크 구성** <br>
 
-<img src="/images/2024-01-20-domain_adapted/스크린샷 2024-01-24 오후 2.44.32.png" alt="스크린샷 2024-01-24 오후 2.44.32" style="zoom:67%;" />
+<img src="/images/2024-01-20-domain_adapted/스크린샷 2024-01-24 오후 2.44.32-6075743.png" alt="스크린샷 2024-01-24 오후 2.44.32" style="zoom:80%;" />
 
 
 
@@ -159,8 +159,10 @@ Front-end
 Back-end 
 
 - 7 pure convolutional layers
+- 드물게 dilated kernel(확장된 커널)을 가진다.
+- dilated kernel은 filter size를 dilated stride로 확대된다.
 
-- 
+$y(m,n) = \sum_{i,j \in I}x(m + r \times i, n + r \times j)w(i,j)$
 
 
 
