@@ -11,13 +11,17 @@ use_math: true
 
 <br>
 
-## Domain adapted broiler density map estimation using negative-patch data augmentation
+## [Domain adapted broiler density map estimation using negative-patch data augmentation](https://www.sciencedirect.com/science/article/pii/S1537511023001241)
+
+
+
+**Author : Taehyeong Kim, Dae-Hyun Lee, Wan-Soo Kim, Byoung-Tak Zhang**
 
 
 
 
 
-### [Abstract]
+### **1. Introduction**
 
 
 
@@ -58,3 +62,24 @@ use_math: true
 
 딥러닝을 통해 물체를 자동으로 감지하는 솔류션이 많은 분야에서 적용됨
 
+- CNN : 이미지 객체분류, 감지, 분할에 강력
+
+  - 다양한 CNN 기반 아키텍쳐에 따라 사람, 사람 밀도를 평가하는데 사용되는 군중 수 계산 방법에 사용
+  - 대규모 이벤트를 모니터링하여 군중 재난을 예방하는데 적용 --> 성공적인 밀도 맵 추정 & end to end learning : 뛰어난 성능
+
+  > end to end learning : 입력에서 출력까지 파이프라인 네트워크 없이 신경망으로 한 번에 처리한다는 의미
+
+
+
+- Density based counting method는 최근(2019)년에 양돈장의 돼지 수를 세는데 적용 <- 대규모 농업 생산 관리를 위해
+-  Counting CNN model 을 기반으로 수정된 모델을 통해, 실제 환경에서 직접 수집하고 웹에서 다운로드한 데이터로 돼지 수를 예측
+  - 373 image를 사용한 supervised learning, image당 평균 돼지 수는 약 15마리로 각 객체의 라벨링은 어렵지 않음.
+  - --> MAE = 2.78 : 이전 crowd counting 연구와 비슷
+- 그러나 일반적 육계 모니터링은 한 이미지에 최소 수백마리로, 일부 육계는 구분할 수 없음
+  - 이러한 육계 이미지에 라벨링된 데이터 세트를 구축하는것은 사실상 불가능
+
+
+
+**도메인은 다르지만, crowd counting과 broiler counting은 유사한 작업이다.**
+
+ 
