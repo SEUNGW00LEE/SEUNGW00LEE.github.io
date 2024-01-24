@@ -82,4 +82,25 @@ use_math: true
 
 **도메인은 다르지만, crowd counting과 broiler counting은 유사한 작업이다.**
 
- 
+도메인은 다르지만, 같은 작업을 할 때 전이 학습인 domain adaptation은 source 도메인(잘 훈련되고 라벨링된 많은 데이터 셋이 있는)을 target domain(라벨링이 잘 안된 데이터셋이 있는)으로  적용할 수 있기 때문에 유용하다. 
+
+- DANN(Domain-Adversarial Training of Neural Networks)
+  - reversal gradient layer , domain discriminator 추가
+  - DANN-based domain adaptation은 plant organ 에 적용될 수 있다. --> 육계 counting에도 적용될 수 있지않을까?
+
+broiler(를 포함한 농업분야에서)는 라벨링된 데이터가 부족한 것이 가장 중요한 문제
+
+broiler 밀도 기반 지도(Density map based broiler)은 broiler 수 뿐만 아니라 flock distribution(무리 분포) 추정이 가능한데, 이는 성장 행동과 사육환경의 상관관계와 관련이 크기때문에 유용하다.
+
+따라서 **DANN 기반 domain adaptation**을 사용하여, **Density map based broiler**를 추정하고 **broiler counting**을 목표로 연구한다.
+
+domain간(source domain과 target domain)의 이질적인 object를 해결하기위해 negative-patch data augmentation strategy를 사용한다.
+
+> negative-patch data augmentation strategy : source image의 임의 영역을 target image의 background로 대체 --> target domain의 distribution area 를 영역을 의도적으로 생성
+>
+> - 이 방법은 weakly-supervised support로 background information을 공유함으로써 추가 annotation cost없이 가능하다.
+
+
+
+### **2. Materials and methods**
+
