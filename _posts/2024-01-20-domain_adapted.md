@@ -11,7 +11,7 @@ use_math: true
 
 <br>
 
-## [Domain adapted broiler density map estimation using negative-patch data augmentation](https://www.sciencedirect.com/science/article/pii/S1537511023001241)
+# [Domain adapted broiler density map estimation using negative-patch data augmentation](https://www.sciencedirect.com/science/article/pii/S1537511023001241)
 
 
 
@@ -19,9 +19,7 @@ use_math: true
 
 
 
-
-
-### **1. Introduction**
+## **1. Introduction**
 
 
 
@@ -107,7 +105,7 @@ domain간(source domain과 target domain)의 이질적인 object를 해결하기
 
 
 
-### **2. Materials and methods**
+## **2. Materials and methods**
 
 
 
@@ -209,7 +207,71 @@ DANN 아키텍쳐는 쉽게 이용될 수 있지만, 이는 **<font color = 'red
 
 이 문제는 **Negative-patch data augmentation**로 해결 할 수 있다.
 
-### 2.3 Negative-patch data augmentation
+### **2.3 Negative-patch data augmentation**
 
 ![image-20240124160550662](/images/2024-01-20-domain_adapted/image-20240124160550662.png)
+
+위 Fig는 위 방법이 앞서 말한 DANN을 통해 모델을 훈련하는 것이다.
+
+(농업과 같이) 데이터 세트에 대한 레이블이 지정된 데이터가 부족하거나 없는 경우에도 밀도맵 추정을 위한 모델을 효율적으로 훈련할 수 있지만, **대상 도메인에 대한 어떤 단서도 없이 밀도 맵 추정을 한다.**
+
+이러한 한계로 인해 소스 도메인의 feature distribution이 target domain의 부적절한 공간에 mapping돼 domain adaptation 실패된다.
+
+특히, 이질적인 도메인간에는 target domain의 feature distribution과 source domain의 feature distribution이 현저히 달라 성능 저하가 더 심해진다.
+
+이러한 문제를 해결하기 위해 **Negative-patch data augmentation**이 제안된다. 
+
+
+
+`Negative patch data augmentation main idea`
+
+
+
+`augment source data by containing clues of target domain, background not subject to density estimation`
+
+NP의 main idea는 source data를 target domain, background의 단서를 포함하여 augment하는 것이다.
+
+육계 무리 scene에는 사람 crowd scene에서 찾아보기 힘든 배경이 있다. 이 배경은 밀도 0을 가진다. 
+
+>  밀도 0이란 not annotated, have 0 value
+
+이러한 target의 밀도 0 background를 source image로 sharing하면, model이 feature에 집중하여 훈련되는 것을 유도한다.
+
+이러한 방법은 해당 영역의 annotation을 삭제하는 등의 추가 작업 없이도 이질적인 두 도메인 간의 domain adaptation을 할 수 있다.
+
+NP는 background image에서 무작위로 잘라냈기 때문에, 다양한 scene과 scale이 있고, doamin adaptation을 위해 source image에 무작위로 augment했다.
+
+
+
+NP region이 너무 크면 밀도 추정을 위한 feature이 손실될 수 있고, NP region이 너무 작으면 효과과 작을 수 있기 때문에 NP 크기를 결정하는 것이 중요하다.
+
+
+
+NP에는 두가지 유형이 있는데 NP-p와 NP-f 이다.
+
+- NP-p는 source image에서 밀도가 0에 가까운 영역을 대체했다.
+- NP-p는 재한적이지만 배경간 교채로 인한 진실의 변화가 없기때문에 NP-f보다 효율적이다.
+- NP-f는 댜앙한 배경 장면을 생성할 수 있지만 시간이 오래 걸린다.
+
+![image-20240124170709825](/images/2024-01-20-domain_adapted/image-20240124170709825.png)
+
+<br>
+
+## **3.Experiment and implementation**
+
+
+
+### **3.1 Data configuration and model training**
+
+<br>
+
+![image-20240124171413523](/images/2024-01-20-domain_adapted/image-20240124171413523.png)
+
+> Fig4. target image collection(left), representative scenes of broiler flock with high stocking density(right)
+
+![image-20240124171744162](/images/2024-01-20-domain_adapted/image-20240124171744162.png)
+
+> Fig5. 수작업으로 표기된 육계 머리 위치를 기반으로 가우시안 커널링을 통해 생성, 정확한 머리 위치 표시를 위해 이미지를 원본 이미지의 4배까지 확대한 후 주석을 달았고, 보이지 않거나 흐릿한 육계는 제외.
+
+
 
