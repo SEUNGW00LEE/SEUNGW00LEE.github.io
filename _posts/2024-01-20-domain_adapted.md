@@ -164,7 +164,7 @@ CSRNet은 다른 최신 모델에 비해, 아키텍쳐가 단순하고 훈련가
 
 $y(m,n) = \sum_{i,j \in I}x(m + r \times i, n + r \times j)w(i,j)$
 
-$y(m,n)은 입력 $x(m,n)과 필터 $w(i,j) 의 dilated convolution form이다.
+$y(m,n)$은 입력 $x(m,n)$과 필터 $w(i,j)$ 의 dilated convolution form이다.
 
 $r$ 은 dilation rate이다.
 
@@ -188,16 +188,28 @@ DANN은 일반적인 피드포워드 아키텍쳐에 특징 추출기와 분류�
 
 `DANN main idea`
 
+
+
 `훈련 단계에서 라벨 예측 손실($Ly$)을 최소화, 도메인 판별 손실($Ld$)을 최대화하여 deep feature mapping을 위한 파라미터를 최적화. `
 
-**adversarial training**을 통해 `입력의 클래스 레이블을 정확하게 판별`하고, `입력의 출처를 무차별적으로 판별할 수 있는 특징을 도메인에서 독립적으로 표현` 할 수 있다.
-`비차별성`은 소스 도메인과 타깃 도메인에 대한 특징 분포의 불일치가 최소화되어 **소스 도메인 데이터에서 학습한 모델이라도 타깃 도메인 데이터 분포에서도 잘 작동**할 수 있다는 것을 의미한다. 
-**Adversarial training**을 구현하기 위해 DANN은 특징 추출기와 도메인 판별기 사이에 역전파 단계에서만 작동하는 그라데이션 반전 레이어를 사용했다. 
+
+
+`adversarial training 입력의 클래스 레이블을 정확하게 판별하고, 입력의 출처를 무차별적으로 판별할 수 있는 특징을 도메인에서 독립적으로 표현 할 수 있다`
+
+**비차별성**은 소스 도메인과 타깃 도메인에 대한 특징 분포의 불일치가 최소화되어 **소스 도메인 데이터에서 학습한 모델이라도 타깃 도메인 데이터 분포에서도 잘 작동**할 수 있다는 것을 의미한다. 
+
+**Adversarial training**을 구현하기 위해 DANN은 특징 추출기와 도메인 판별기 사이에 역전파 단계에서만 작동하는 그라데이션 반전 레이어를 사용했다.
+
+
 **이 단일 레이어의 간단한 기능은 그라디언트 방향을 반대로 변경하는 것으로, 매개변수 Ld를 업데이트한다.**
 
 
 
-DANN 아키텍쳐는 쉽게 이용될 수 있지만, 이는 
+DANN 아키텍쳐는 쉽게 이용될 수 있지만, 이는 **<font color = 'red'>target domain의 특정 feature distribution을 명확히 설명할 수 없다</font>**는 단점이 있다.
 
+이 문제는 **Negative-patch data augmentation**로 해결 할 수 있다.
 
+### 2.3 Negative-patch data augmentation
+
+![image-20240124160550662](/images/2024-01-20-domain_adapted/image-20240124160550662.png)
 
