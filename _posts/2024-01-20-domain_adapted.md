@@ -355,7 +355,31 @@ density map quality - using standard method:PSNR
 
 <br>
 
-### 
+**[Loss graph]**
+
+SL은 Epochs 50이전에 급격히 감소하고 서서히 포화되는 반면, DANN 기법은 증가하는 것을 관찰할 수 있다.
+
+DANN 손실 곡선은 처음부터 급격한 증가를 보였으며, 해당 논문에서 제안된 NP 전략은 DANN에 적용했을 때 손실 증가를 억제할 수 있었다. 
+
+이는 NP가 source domain 과 target domain 간의 feature gap을 줄이고 DANN 진행 중 domain-invariant features 추출을 돕는 것을 나타낼 수 있다.
+
+**[Accuracy graph]**
+
+값이 0.5일 때 domain classifier 가 두 domain 간 adversarial learning이 잘 수행돼 source image의 density map을 예측하고, source domain과 target domain 의 구분을 방해하도록 모델을 학습시켰음을 보인다.
+
+
+
+### 4.2 Density map estimation of broiler flock
+
+![image-20240124220535145](/images/2024-01-20-domain_adapted/image-20240124220535145.png)
+
+> Performance of the broiler density map estimation by NP size. The comparisons were represented by using (a) MAE, (b) MRAE, and (c) MSE metrics.
+
+NP size에 대한 estimation을 봤을 때, NP 20% 일 때 MAE, MARE가 가장 작았다. MSE는 앞선 두 지표와 비슷한 패턴을 보이지 않지만 마찬가지로 20%에서 가장 작은 것을 볼 수 있다.
+
+모든 지표에서 20% NP size가 가장 좋은 성능을 보였기때문에 다른 시험에서도 20% NP를 수행했다.
+
+![image-20240124221920687](/images/2024-01-20-domain_adapted/image-20240124221920687.png)
 
 
 
