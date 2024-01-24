@@ -263,6 +263,16 @@ NP에는 두가지 유형이 있는데 NP-p와 NP-f 이다.
 
 ### **3.1 Data configuration and model training**
 
+사육 용량 : 3만 마리
+
+고해상도 이미지(4032 x 3024) : 78
+
+원본 이미지 : 420 (육계 데이터 샘플  375 + 네거티브 패치 증강에 사용된 배경이미지 45)
+
+육계 데이터 샘플 : 375 - train(300), validation(38), test(37)
+
+- **Target domain data** 
+
 <br>
 
 ![image-20240124171413523](/images/2024-01-20-domain_adapted/image-20240124171413523.png)
@@ -275,3 +285,68 @@ NP에는 두가지 유형이 있는데 NP-p와 NP-f 이다.
 
 
 
+- **Source domain data**
+
+
+
+241,667명의 인물이 주석처리된 대규모 혼잡 장면(상하이테크 파트)
+
+
+
+1. 라벨이 지정된 source domain 이미지 300개 + 라벨이 지정되지 않은 target domain 이미지 300개를 통해 training stage에서 model 훈련(파라미터 업데이트)
+
+2. 총 600개의 이미지를 사용하여 domain classifier를 훈련하고, 레이블이 지정되어있는 소스 이미지를 사용하여 density predictor를 훈련 및 실측 데이터와 유사한 density map 생성
+3. CSRNet(pipeline backbone)은 다양한 input size를 지원하므로, batch size는 1로 설정
+4. density prediction loss : MSE 
+   domain discrimination loss : cross-entropy
+5. using Adam optimiser
+6. parameter
+   Learning rate : 1e-6
+   Epoch : 300
+   validation set was calculated in every epoch
+
+
+
+### 3.2 Performance evaluation
+
+
+
+1. **Baseline(DA 미적용)**
+2. **지도학습**
+   - **육계 데이터 세트의 38개 labelled data로 구성된 validation set을 19개와 18개로 나누어 train과 validation을 진행**
+
+3. **DANN**
+
+4. **DANN + NP-p**
+
+5. **DANN + NP-f**
+
+<br>
+
+**evaliation metric**
+
+MAE, MRAE, $R^2$
+
+density map quality - using standard method:PSNR
+
+
+
+> Table 1. People crowd datasets used as source domain.
+
+| Datasets           | Number of images | Average count per image | Reference             |
+| ------------------ | ---------------- | ----------------------- | --------------------- |
+| SanghaiTech Part A | 482              | 501                     | Zhang et al. (2016)   |
+| SanghaiTech Part B | 716              | 124                     |                       |
+| UCF-CC-50          | 50               | 1279                    | Idrees et al. (2013)  |
+| UCF-QNRF           | 1535             | 815                     | Idrees et al. (2018)  |
+| JHU-CROWD          | 4372             | 346                     | Sindagi et al. (2020) |
+
+> peple crowd dataset 비교
+
+## 4. Results and discussion
+
+
+
+
+
+![image-20240124174318953](/images/2024-01-20-domain_adapted/image-20240124174318953.png)
