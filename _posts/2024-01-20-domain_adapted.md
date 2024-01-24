@@ -471,3 +471,22 @@ SL 방법은 0.97의 R2로 육계 수를 예측할 수 있어 가장 높은 성�
 
 
 
+
+
+---
+
+
+
+<br>
+
+---
+
+
+
+#### *<u>Reference</u>*
+
+- [Domain adapted broiler density map estimation using negative-patch data augmentation](https://www.sciencedirect.com/science/article/pii/S1537511023001241)
+
+
+
+
