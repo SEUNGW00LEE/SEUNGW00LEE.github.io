@@ -9,13 +9,16 @@ use_math: true
 
 ---
 
-<br>
+<font color=gray>DANN + NP를 통해 축산의 한계를 해결한 'Domain adapted broiler density map estimation using negative-patch data augmentation' 논문 리뷰입니다.</font>  <br>
 
 # [Domain adapted broiler density map estimation using negative-patch data augmentation](https://www.sciencedirect.com/science/article/pii/S1537511023001241)
 
+---
 
+**Taehyeong Kim, Dae-Hyun Lee, Wan-Soo Kim, Byoung-Tak Zhang,**
+**Domain adapted broiler density map estimation using negative-patch data augmentation,Biosystems Engineering,Volume 231,2023,Pages 165-177,ISSN 1537-5110**
 
-**Author : Taehyeong Kim, Dae-Hyun Lee, Wan-Soo Kim, Byoung-Tak Zhang**
+---
 
 
 
