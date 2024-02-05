@@ -30,14 +30,14 @@ group_by_exp: 'post', 'post.date | date: "%Y"' %} {% for year in postsByYear %}
     >{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }}
     &uarr;</a
   >
+  <script
+    src="https://utteranc.es/client.js"
+    repo="SEUNGW00LEE/comment"
+    issue-term="title"
+    label="💬comment"
+    theme="github-light"
+    crossorigin="anonymous"
+    async
+  ></script>
 </section>
 {% endfor %}
-
-<script
-  src="https://utteranc.es/client.js"
-  repo="SEUNGW00LEE/SEUNGW00LEE.github.io"
-  issue-term="url"
-  theme="github-light"
-  crossorigin="anonymous"
-  async
-></script>
