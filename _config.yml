@@ -31,9 +31,9 @@ breadcrumbs: true # true, false (default)
 words_per_minute: 200
 comments:
   provider: "utterances"
-  utterances:
-    theme: "github-light" # "github-dark"
-    issue_term: "pathname"
+  # utterances:
+  #   theme: "github-light" # "github-dark"
+  #   issue_term: "pathname"
   provider: # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   disqus:
     shortname: # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
