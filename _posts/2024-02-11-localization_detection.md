@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "[CS231n review] Lecture5 - Localization & Detection"
+title: "[CS231n review] Lecture8 - Localization & Detection"
 categories: [AI, Computer Vision, CS231n]
 tag: [CS231n, Computer Vision, AI, CNNs]
 typora-root-url: ../
@@ -8,39 +8,41 @@ use_math: true
 
 ---
 
-![img](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1522766479/1_KCpy3xvBTeX5xTRwB1baCA_ux1wbl.gif)
+<img src="https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1522766479/1_KCpy3xvBTeX5xTRwB1baCA_ux1wbl.gif" alt="img" style="zoom: 150%;" />
 
 
 
-<br><font color=gray>Stanford CS231n(2017)를 학습하며 정리 및 추가한 내용입니다.</font> <br>
+<br><font color=gray>Stanford CS231n(2016)를 학습하며 정리 및 추가한 내용입니다.</font> <br>
 
 <br>
 
-# Localization & Detection
+# **Localization & Detection**
 
+<br>
 
-
-지금까지 배운 Classification은 아래의 Image를 '고양이'라고 labeling했다.
+지금까지 배운 Classification은 아래의 Image를 '고양이'라고 labeling했습니다.
 
 <img src="/images/2024-02-11-localization_detection/image-20240212000008718.png" alt="image-20240212000008718" style="zoom:50%;" />
 
-이 Classification에 localization을 더하면 아래처럼, 고양이가 있는 부분을 박스로 표시할 수 있다.
+이 **Classification**에 **localization**을 더하면 아래처럼, 고양이가 있는 부분을 박스로 표시할 수 있습니다.
+
+이 박스는 boundry box라고 칭합니다.
 
 <img src="/images/2024-02-11-localization_detection/image-20240212000117694.png" alt="image-20240212000117694" style="zoom:50%;" />
 
-Object Detection이란 multiple object가 있을 때 여러 object를 찾아내는 것을 말한다.
+**Object Detection**이란 multiple object가 있을 때 여러 object를 찾아내는 것을 말합니다.
 
 <img src="/images/2024-02-11-localization_detection/image-20240212000302931.png" alt="image-20240212000302931" style="zoom:50%;" />
 
-아래의 사진처럼 object를 형상으로 따주는 것을 segementation이라고 한다.
+아래의 사진처럼 object를 형상으로 따주는 것을 **segementation**이라고 합니다.
 
 <img src="/images/2024-02-11-localization_detection/image-20240212000403561.png" alt="image-20240212000403561" style="zoom:50%;" />
 
-아래로 갈수록 컴퓨터 입장에서 더 어렵다고 할 수 있다.
+아래로 갈수록 컴퓨터 입장에서 더 어렵다고 말할 수 있습니다.
 
-해당 강의에서는 segementation을 제외한 localization와 segementation에 대해 학습한다. 
+해당 강의에서는 segementation을 제외한 localization와 segementation에 대해 학습합니다. 
 
-해당 강의를 먼저 크게 overview하면,
+해당 강의의 순서를 간단하게 보면 아래와 같습니다.
 
 
 
@@ -62,13 +64,99 @@ Object Detection이란 multiple object가 있을 때 여러 object를 찾아내�
 
 
 
-강의자료, 강의시간은 이전과 사이즈가 크게 다르지않지만, 각각의 개념이 가지는 정보량이 많아 오래 걸렸다. 
+강의자료, 강의시간은 이전과 사이즈가 크게 다르지않지만, 각각의 개념이 가지는 정보량이 많아 오래 걸렸습니다. 
 
-강의의 취지에 맞게 디테일한 부분은 추후에 논문 리뷰를 통해 알아보는 것으로 하고 개괄적인 localization과 detection을 시간의 흐름에 따라 리뷰해보도록 하겠다.
-
-아래는 cs231n 스터디 과정에서 필기 및 강의자료를 적은 것이다. 빠른 시일 안으로 정리를 하여 업로드할 것이다.
+강의의 취지에 맞게 디테일한 부분은 추후에 논문 리뷰를 통해 알아보는 것으로 하고 개괄적인 localization과 detection을 시간의 흐름에 따라 리뷰해보도록 하겠습니다.
 
 
+
+## **Localization**
+
+
+
+
+
+<img src="/images/2024-02-11-localization_detection/image-20240212000117694.png" alt="image-20240212000117694" style="zoom:50%;" />
+
+classification에서 고양이 사진을 고양이로 분류하고, Localization을 통해 고양이가 어느 위치에 있는지 알 수 있어야합니다.
+
+
+
+<br>
+
+Localization에 대한 아이디어는 Localization as Regression, Sliding Window 총 2개입니다.
+
+먼저 **Localization as Regression**에 대해 살펴보겠습니다.
+
+<br>
+
+
+
+## **Localization as Regression**
+
+<br>
+
+Localization as Regression을 간단하게 설명하면, Input으로 Image를 받으면, Localization은 Box의 좌표$(x,y,w,h)$ 좌표를 Output으로 내놓습니다.
+
+예측한 Box 좌표와 정답 Box 좌표를 비교하여 L2 distance Loss를 구하여 학습합니다.
+
+![image-20240214231023047](/images/2024-02-11-localization_detection/image-20240214231023047.png)
+
+Localization as Regression을 단계적으로 살펴보겠습니다.
+
+1단계는 먼저 Classification model을 학습합니다. 
+
+이전의 강의에서 배운대로 동일하게 CNN을 활용하여 Classification model을 학습합니다.
+
+이를 Classification head라고 합니다.
+
+![image-20240214231229953](/images/2024-02-11-localization_detection/image-20240214231229953.png)
+
+2단계에서는 Regression head를 추가합니다. 
+
+해당 Regression head에서 Box의 좌표를 output으로 내놓습니다.
+
+다음 3단계에서는 위의 regression head를 훈련시킵니다.
+
+마지막으로 Regression head와 Classification head를 둘 다 이용하여 결과물을 산출합니다.
+
+
+
+Regression Head에는 Class agnostic 방법과 Class specific 방법이 있습니다.
+
+Class agnostic은 좌표 하나를 산출하고, Class specific 은 class 당 좌표 하나를 산출합니다.
+
+예를 들어, Classification에서 Cat일 확률이 가장 높더라도, Class specific은 Cat의 좌표와 Dog의 좌표를 각각 class 별로 산출합니다.
+
+![image-20240215001053185](/images/2024-02-11-localization_detection/image-20240215001053185.png)
+
+
+
+또한, Regression head 를 붙이는 방법은 conv Layer 뒤에 붙이는 방법과 FC layer 뒤에 붙이는 두가지 방법이 존재합니다. 
+
+
+
+### Sliding Window
+
+![img](https://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1522766479/1_KCpy3xvBTeX5xTRwB1baCA_ux1wbl.gif)
+
+
+
+
+
+두번째 방법은 Sliding Window입니다.
+
+
+
+
+
+
+
+
+
+---
+
+## *스터디 속기록* 
 
 Localization as Regression 방법에서는
 
