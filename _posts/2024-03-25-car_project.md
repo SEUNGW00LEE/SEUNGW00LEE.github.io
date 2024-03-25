@@ -196,25 +196,25 @@ use_math: true
 
   - 아래 변수를 Boxplot으로 시각화한 결과 이상치를 발견하여 수정하였습니다.
 
-    - 가격에 대한 Boxplot
+    - 가격에 대한 Boxplot<br>
 
       <img src="/images/2024-03-25-car_project/image-20240325212823496.png" alt="image-20240325212823496" style="zoom:50%;" />
 
-    - 주행거리에 대한 Boxplot
+    - 주행거리에 대한 Boxplot<br>
 
       <img src="/images/2024-03-25-car_project/image-20240325212840612.png" alt="image-20240325212840612" style="zoom:50%;" />
 
   - **가격 30,000,000만원  →  3,000만원**
 
-    [2021 현대 팰리세이드(19~22년) 3.8 가솔린 2WD 프레스티지 중고차 | 보배드림 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2221734&gubun=K)
+    [2021 현대 팰리세이드(19~22년) 3.8 가솔린 2WD 프레스티지 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2221734&gubun=K)
 
   - **가격 630,000만원  →  630만원**
 
-    [2015 현대 포터2 슈퍼캡 내장탑차  초장축 디럭스 중고차 | 보배드림 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2222647&gubun=K)
+    [2015 현대 포터2 슈퍼캡 내장탑차  초장축 디럭스 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2222647&gubun=K)
 
   - **주행거리 2,322,500km  →  232,000km**
 
-    [2010 현대 제네시스 쿠페(08~11년) 3.8 GT RW 중고차 | 보배드림 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2222198&gubun=K)
+    [2010 현대 제네시스 쿠페(08~11년) 3.8 GT RW 중고차](https://www.bobaedream.co.kr/mycar/mycar_view?no=2222198&gubun=K)
 
 
 
