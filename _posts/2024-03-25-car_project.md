@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "[기계학습의 이해]중고차 가격 예측 및 사이트 추천"
-categories: [Machine Learning]
+categories: [AI, Machine Learning]
 tag: []
 typora-root-url: ../
 use_math: true
@@ -9,8 +9,6 @@ use_math: true
 
 
 ---
-
-
 
 
 
