@@ -55,7 +55,7 @@ use_math: true
 
 > datatoys-imdependenceMov
 
-<img src="/images/2024-04-01-statgarten_datatoys/스크린샷 2024-04-01 오후 3.32.14.png" alt="스크린샷 2024-04-01 오후 3.32.14" style="zoom:50%;" />
+<img src="/images/2024-04-01-statgarten_datatoys/image-20240401155329098.png" alt="image-20240401155329098" style="zoom:50%;" />
 
 위 사진은 3.1절을 맞이하여, 독립운동관련 문서 데이터를 통하여, **datatoys**의 **impedenceMov**를 워드클라우드를 생성한 예시코드이다. 예시코드에서 보는 것과 같이, '하여', '하고', '것입니다','것이다', '우리' 와 같은 단어가 반복적으로 나타나는 것을 관찰 할 수 있다.
 
