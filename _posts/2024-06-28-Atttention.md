@@ -42,6 +42,10 @@ RNN의 동작 방식 (Recurrent Neural Network)
 
 이와 같이 \\(h)\\는 이전의 정보를 가진다.
 
+<img src="/images/2024-06-28-Atttention/image-20240628182054796.png" alt="image-20240628182054796" style="zoom:50%;" />
+
+ 
+
 
 
 
