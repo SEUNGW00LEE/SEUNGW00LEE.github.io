@@ -1,0 +1,58 @@
+---
+layout: single
+title: "Attention, Transformer에 대하여"
+categories: [AI, Paper Review]
+tag: []
+typora-root-url: ../
+use_math: true
+
+
+
+---
+
+<img src="/images/2024-06-28-Atttention/image-20240628025940178.png" alt="image-20240628025940178" style="zoom:50%;" />
+
+Transformer를 알기 전, RNN부터 알아야한다.
+
+RNN은 연속적인 데이터에 잘 동작한다.
+
+Word embedding : 단어를 숫자로 바꾸자
+
+저는 학생 입니다.
+
+[1,0,0], [0,1,0], [0,0,1]
+
+X1, X2, X3
+
+이를 Neural Network에 순차적으로 넣어보자 (RNN의 접근법)
+
+RNN의 동작 방식 (Recurrent Neural Network)
+
+<img src="/images/2024-06-28-Atttention/image-20240628181213342.png" alt="image-20240628181213342" style="zoom:50%;" />
+
+### RNN의 수식
+
+- 화살표를 지날 때 FC 통과한다고 생각하면 된다.
+
+<img src="/images/2024-06-28-Atttention/image-20240628181416186.png" alt="image-20240628181416186" style="zoom:50%;" />
+
+\\(W_x, W_h, W_y, b, b_y\\) 는 시간에 따라 다르지 않다.
+
+<img src="/images/2024-06-28-Atttention/image-20240628181909067.png" alt="image-20240628181909067" style="zoom:50%;" />
+
+이와 같이 \\(h)\\는 이전의 정보를 가진다.
+
+
+
+
+
+
+
+Attention 시점마다 context vector가 변한다.
+
+Attention의 방식은 dot product이다.
+
+hidden state 간의 weight sum.
+
+ 벡터에 행렬을 곱하는 것은 곧 선형변환.
+
