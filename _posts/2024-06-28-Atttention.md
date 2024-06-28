@@ -46,7 +46,18 @@ RNN의 동작 방식 (Recurrent Neural Network)
 
  
 
+다음에 어떤 알파벳(one-hot encoded)이 나와야 할까? => 다중 분류네!
 
+=> *ŷ* 을 softmax 통과시켜서 cross-entropy 계산
+ => ELLO 네개 글자에 대해 cross-entropy 더해주면 되겠네~
+
+근데 O가 나오게 하기 위해 H가 gradient 에 미치는 영향력?
+
+멀수록 잊혀진다..! 또, 갈수록 흐려진다..!
+
+(tanh 때문)
+
+이 둘 모두 RNN의 구조적 한계
 
 
 
