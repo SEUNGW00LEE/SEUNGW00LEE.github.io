@@ -140,31 +140,43 @@ $$
 
 
 
+**이 RNN에 Attention을 추가한 것이 seq2seq이다.**
+
+
+
 ## **seq2seq**
 
 - **각각의 cell은 plain RNN에서 발전된 형태인 LSTM이나 GRU를 주로 사용한다.**
+
+- **input으로 sequence를 받는다.(word, image 등등)**
+
+- **output으로 다른 sequence를 내놓는다.**
+
+- <video src="/../../Desktop/seq2seq_1.mp4"></video>
+
+  **위처럼 세개의 item이 들어가도 4개의 item이 출력될 수 있다.**
+
+  
+
+- 
+
+  <img src="/images/2024-06-28-Atttention/image-20240630053332916.png" alt="image-20240630053332916" style="zoom:50%;" />
+
 - **encoder, decoder 두 파트로 구성된다.**
+
 - **encoder의 마지막 h를 decoder의 첫 h로 사용한다.**
-- **학습 시엔 teacher forcing, test 땐 출력 나온 것을 입력으로 사용한다.**
 
-**<img src="/images/2024-06-28-Atttention/image-20240629233216235.png" alt="image-20240629233216235" style="zoom:50%;" />**
+### seq2seq의 문제점
 
-
-
-### **seq2seq의 문제점**
-
-- **멀수록 잊혀진다는 문제를 해결하지 못했다.**
+- **문맥 벡터가 encoder의 모든 시퀀스의 정보를 포함하고 있기때문에 decoding 시 개별 토큰과의 관계 파악이 어렵다.**
 - **context vector에 마지막 단어의 정보가 가장 많이 담긴다.**
   - **즉 마지막 단어를 가장 열심히 본다.**
+- **멀수록 잊혀진다는 문제를 해결하지 못했다**
+  **->Sequence가 길어지는 경우 RNN의 고질적인 문제인 기울기 소실 위험**
 
 
 
-- **plain RNN이 번역기로 잘 안쓰이는 이유**
-  - **무조건 나중의 정보가 중요하게 처리하기 때문**
-- **LSTM, GRU가 있다지만 근본적인 해결책이 될 수 없다.**
-- **이를 해결한 것이 트랜스포머**
-  - ***Attention is all you need***
-  - **핵심 아이디어 : 무엇을 중요하게 봐야하는지 학습하자**
+
 
 
 
@@ -182,6 +194,14 @@ $$
 
 
 **다음 포스터에서 트랜스포머에 대해 포스팅하도록 하겠다.**
+
+
+
+
+
+https://jalammar.github.io/illustrated-transformer/
+
+
 
 
 
