@@ -30,17 +30,18 @@ use_math: true
 
 **즉, 과거와 현재는 같은 weight를 공유한다.**
 
-> First Order system : 현재 시간의 상태가 이전 시간의 상태와 관련이 있다고 가정
-
-
+- First Order system : 현재 시간의 상태가 이전 시간의 상태와 관련이 있다고 가정
+  - $x_t = f(x_(t-1))$
+  - $x_t$ : $t$일때 상태
+  - 이 시스템은 외부 입력 없이 자기 혼자서 돌아간다.
 
 **Word embedding : 단어를 숫자로 바꾸자**
 
 **저는 학생 입니다.**
 
--> **[1,0,0], [0,1,0], [0,0,1]**
+-> $[1,0,0], [0,1,0], [0,0,1]$
 
--> $X1, X2, X3$
+-> $X_1, X_2, X_3$
 
 **이를 Neural Network에 순차적으로 넣어보자 (RNN의 접근법)**
 
@@ -62,7 +63,7 @@ use_math: true
 
 **<img src="/images/2024-06-28-Atttention/image-20240628182054796.png" alt="image-20240628182054796" style="zoom:50%;" />**
 
-**** 
+****
 
 **다음에 어떤 알파벳(one-hot encoded)이 나와야 할까? => 다중 분류네!**
 
@@ -79,11 +80,15 @@ use_math: true
 
 **이 둘 모두 RNN의 구조적 한계이다.**
 
- ## **RNN의 유형**
+
+
+## RNN의 유형
 
 
 
 **<img src="/images/2024-06-28-Atttention/image-20240629233135329.png" alt="image-20240629233135329" style="zoom:50%;" />**
+
+
 
 ## **seq2seq**
 
@@ -94,11 +99,15 @@ use_math: true
 
 **<img src="/images/2024-06-28-Atttention/image-20240629233216235.png" alt="image-20240629233216235" style="zoom:50%;" />**
 
+
+
 ### **seq2seq의 문제점**
 
 - **멀수록 잊혀진다는 문제를 해결하지 못했다.**
 - **context vector에 마지막 단어의 정보가 가장 많이 담긴다.**
   - **즉 마지막 단어를 가장 열심히 본다.**
+
+
 
 
 
