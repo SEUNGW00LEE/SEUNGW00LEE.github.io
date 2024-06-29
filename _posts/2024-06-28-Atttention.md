@@ -1,6 +1,7 @@
 ---
+
 layout: single
-title: "1. RNN"
+title: "1. RNN & Seq2Seq"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
@@ -156,15 +157,23 @@ $$
 
   **위처럼 세개의 item이 들어가도 4개의 item이 출력될 수 있다.**
 
-  
-
-- 
+  <video src="/../../Desktop/seq2seq_2.mp4"></video>
 
   <img src="/images/2024-06-28-Atttention/image-20240630053332916.png" alt="image-20240630053332916" style="zoom:50%;" />
 
-- **encoder, decoder 두 파트로 구성된다.**
+- **encoder(입력된 정보를 어떻게 저장할 것인가), decoder(압력된 정보를 어떻게 해석할 것인가, 어떻게 출력할 것인가) 두 파트로 구성된다.**
 
-- **encoder의 마지막 h를 decoder의 첫 h로 사용한다.**
+- **encoder: 각각의 input sequence를 processes하여, 그것들이 가지고 있는 정보들을 compile하여 하나의 벡터(context vector, 문맥벡터)로 정의한다.**
+
+- **decoder : context vector을 받아서 output sequence를 item by item으로 표현한다.**
+
+  **아래 영상이 이를 잘 보여준다.**
+
+  <video src="/../../Desktop/seq2seq_5.mp4"></video>
+
+**이를 펼쳐서 보면 아래와 같다.**
+
+<video src="/../../Desktop/seq2seq_6.mp4"></video>
 
 ### seq2seq의 문제점
 
@@ -176,9 +185,25 @@ $$
 
 
 
+**이를 해결하기 위해 LSTM, GRU를 통해 해결하고자 하였다.**
+
+**하지만 완벽히 해결할 수 없고, Attention 개념이 등장했다.**
+
+**어텐션이란 모델이 각각의 input sequence 중에서 output sequence에서 주목해야하는 part를 direct로 가중치를 줘서 정보를 더 잘 활용할 수 있도록 한다.**
 
 
 
+**Attention이 가미된 Seq2Seq는 아래 그림과 같다.**
+
+<video src="/../../Desktop/seq2seq_7.mp4"></video>
+
+1. encoder가 더이상 파이널 히든 스테이트 뿐만 아니라, 전체 hidden state를 디코더에 넘겨주기 때문에 보다 많은 정보를 넘겨준다.
+
+2. decoder가 필요한 hidden state 중 필요한 정보를 취사선택한다.
+
+<img src="/images/2024-06-28-Atttention/image-20240630060146825.png" alt="image-20240630060146825" style="zoom:50%;" />
+
+3. decoder은 encoder가 전달하는 여러개의 hidden state를 ex
 
 **발전 방향 : RNN -> RNN + Attention -> 트랜스포머**
 
