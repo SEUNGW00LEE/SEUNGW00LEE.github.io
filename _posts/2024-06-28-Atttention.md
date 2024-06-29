@@ -40,7 +40,7 @@ $W_x, W_h, W_y, b, b_y$는 시간에 따라 다르지 않다.
 
 <img src="/images/2024-06-28-Atttention/image-20240628181909067.png" alt="image-20240628181909067" style="zoom:50%;" />
 
-이와 같이 \\(h)\\는 이전의 정보를 가진다.
+이와 같이 $h$는 이전의 정보를 가진다.
 
 <img src="/images/2024-06-28-Atttention/image-20240628182054796.png" alt="image-20240628182054796" style="zoom:50%;" />
 
