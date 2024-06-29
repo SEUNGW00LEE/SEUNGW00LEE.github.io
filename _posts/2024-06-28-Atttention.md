@@ -189,7 +189,17 @@ $$
 
 **하지만 완벽히 해결할 수 없고, Attention 개념이 등장했다.**
 
+---
+
+
+
+## Seq2Seq with Attention
+
+
+
 **어텐션이란 모델이 각각의 input sequence 중에서 output sequence에서 주목해야하는 part를 direct로 가중치를 줘서 정보를 더 잘 활용할 수 있도록 한다.**
+
+
 
 
 
@@ -197,13 +207,32 @@ $$
 
 <video src="/../../Desktop/seq2seq_7.mp4"></video>
 
+
+
 1. encoder가 더이상 파이널 히든 스테이트 뿐만 아니라, 전체 hidden state를 디코더에 넘겨주기 때문에 보다 많은 정보를 넘겨준다.
 
 2. decoder가 필요한 hidden state 중 필요한 정보를 취사선택한다.
 
 <img src="/images/2024-06-28-Atttention/image-20240630060146825.png" alt="image-20240630060146825" style="zoom:50%;" />
 
-3. decoder은 encoder가 전달하는 여러개의 hidden state를 ex
+3. decoder은 encoder가 전달하는 여러개의 hidden state를 extra step을 수행한다.
+
+   extra step : encoder가 보내준 각각의 hidden state는 해당하는 단어의 sequence에 가장 큰 영향을 받을텐데, 이에 대한 score를 부여한다.
+
+   score에 대해 softmax를 수행한 후 모두 결합한다.
+
+   <img src="/images/2024-06-28-Atttention/image-20240630061444358.png" alt="image-20240630061444358" style="zoom:25%;" />
+
+일반적으로 hidden state vector와 context vector를 concatenate한다.
+
+(따라서 전체 사이즈는 hidden state vector + context vector)
+
+<video 
+ src="/../../Desktop/seq2seq/attention_tensor_dance.mp4"></video>
+
+
+
+
 
 **발전 방향 : RNN -> RNN + Attention -> 트랜스포머**
 
