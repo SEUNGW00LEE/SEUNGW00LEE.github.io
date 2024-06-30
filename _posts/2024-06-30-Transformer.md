@@ -11,9 +11,86 @@ use_math: true
 
 <img src="/images/2024-06-30-Transformer/image-20240628025940178.png" alt="image-20240628025940178"/>
 
+트랜스포머는 기존 encoder, decoder을 발전시킨 딥러닝 모델이다.
+
+가장 큰 차이점은 RNN을 사용하지않는 점이다.
+
+기존 RNN을 사용하지 않고 학습이 빠르고 성능이 좋기에 큰 관심을 이끌었다.
+
+트랜스포머는 어떻게 더 빠르게 학습이 될 수 있을까에 대한 한마디 답은 병렬화이다.
+
+RNN이 순차적으로 첫번째부터 마지막까지 계산해 인코딩하는 반면 트랜스포머는 한번에 이 과정을 처리한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701005657860.png" alt="image-20240701005657860" style="zoom:50%;" />
+
+이 과정이 기존 전통적인 Encoder, Decoder 모델이다.
+
+context vector의 크기가 고정이므로 input이 커질수록, 번역이 엉터리가 되는 경우가 많다.
+
+이를 Attention을 통해 진보된 Encoder, Decoder모델이 등장했다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701005846377.png" alt="image-20240701005846377" style="zoom:50%;" />
+
+이는 고정된 크기의 context vector를 사용하지않고, 단어를 하나씩 번역할 때마다 어텐션 메커니즘을 통해 효율적인 번역을 하는 장점이 있다.
+
+따라서 긴 문장의 번역 성능이 기존의 모델보다 상당히 성능이 좋아졌다.
+
+하지만 RNN을 순차적으로 계산하여 느리다는 점과, 성능의 한계를 보였다.
+
+이 한계를 극복한 모델이 바로 Transformer이다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701010045745.png" alt="image-20240701010045745" style="zoom:50%;" />
+
+RNN의 순차적인 계산은 트랜스포머의 행렬의 곱으로 해결했다.
+
+또한 Transformer Decoder 연산과정은 어텐션 기반 encoder, decoder과 닮아있다.
+
+트랜스포머의 가장 큰 장점은 RNN을 성공적으로 제거한 점이다.
+
+이를 통해 학습시간을 크게 감축하고 성능을 높였다.
+
+---
+
+RNN이 없는 트랜스포머는 어떻게 위치 정보를 처리할 수 있을까
+
+바로 포지셔닝 인코딩이다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701010338284.png" alt="image-20240701010338284" style="zoom:50%;" />
+
+포지셔닝 인코딩은 크게 두가지 장점이 있다.
+
+1. 항상 포지셔닝 인코딩은 -1~+1로 할당된다.
+2. 모든 포지셔닝 인코딩은, 상대적인 인코딩 값을 줄 수 있다.
+
+---
+
+<img src="/images/2024-06-30-Transformer/image-20240701010518039.png" alt="image-20240701010518039" style="zoom:50%;" />
+
+<img src="/images/2024-06-30-Transformer/image-20240701010702976.png" alt="image-20240701010702976" style="zoom:50%;" />
 
 
-Transformer은 Attention을 이용해 한번의 하나의 토큰 씩 하는 것이 아닌 한꺼번에 정보를 처리한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701010953890.png" alt="image-20240701010953890" style="zoom:50%;" />
+
+출력벡터의 차원의 크기와 입력벡터의 차원의 크기가 같다.
+
+이는 즉슨, encoder layer를 여러개 붙일 수 있다는 점을 시사한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701011048192.png" alt="image-20240701011048192" style="zoom:50%;" />
+
+Decoder 역시 병렬식 처리를 적극 활용한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701011226792.png" alt="image-20240701011226792" style="zoom:50%;" />
+
+이때 Decoder의 softmax는 label smoothing을 적용하여 퍼포먼스를 높인다.
+
+이는 입력값이 Noisy한 경우 큰 도움을 주는데, 같은 데이터의 서로 다른 정답값이 one-hot encoding 처리가 될 때 label을 가림으로써 학습에 용이하게 할 수 있다.
+
+---
+
+
+
+
 
 <img src="/images/2024-06-30-Transformer/image-20240630192102249.png" alt="image-20240630192102249" style="zoom:25%;" />
 
@@ -30,8 +107,6 @@ Encoding block vs Decoding block = Unmasked vs Masked
 
 
 Transformer의 Encoder의 특징은 각각의 Encoder은 전부 동일한 구조를 가진다.
-
-다만, 가중치를 공유하는 것은 아니다.
 
 <img src="/images/2024-06-30-Transformer/image-20240630192713643.png" alt="image-20240630192713643" style="zoom:25%;" />
 
