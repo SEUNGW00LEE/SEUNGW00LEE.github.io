@@ -6,9 +6,6 @@ categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
 use_math: true
-
-
-
 ---
 
 **<img src="/images/2024-06-28-Atttention/image-20240628025940178.png" alt="image-20240628025940178"/>**
@@ -191,11 +188,11 @@ $$
 
 **하지만 완벽히 해결할 수 없고, Attention 개념이 등장했다.**
 
----
 
 
 
-## Seq2Seq with Attention
+
+## **Seq2Seq with Attention**
 
 
 
@@ -254,6 +251,12 @@ $$
 
 
 
+
+
+
+---
+
+***Reference***
 
 https://jalammar.github.io/illustrated-transformer/
 

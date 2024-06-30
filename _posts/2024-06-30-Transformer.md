@@ -1,6 +1,6 @@
 ---
 layout: single
-title:"2.Transformer"
+title: "2.Transformer"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
