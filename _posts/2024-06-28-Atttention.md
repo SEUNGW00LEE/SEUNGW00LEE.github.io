@@ -1,9 +1,8 @@
 ---
-
 layout: single
 title: "1. RNN & Seq2Seq"
-categories: [AI, Paper Review]
-tag: []
+categories: [AI, Transformer]
+tag: [RNN, Seq2Seq, Attention]
 typora-root-url: ../
 use_math: true
 ---

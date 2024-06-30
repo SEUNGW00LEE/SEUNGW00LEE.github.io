@@ -138,21 +138,43 @@ $\sqrt{d_k}$를 Score에 나눠준다.
 
 **Step 6**
 
-z1 은 $v_1$과 $v_2$를 더한 값(가중 합이 된)이다.
+$z_1$ 은 $v_1$과 $v_2$를 더한 값(가중 합이 된)이다.
 
 이 값이 self attention의 output이다.
 
 
 
-이를 Matrix calculation으로 보면
+이를 Matrix calculation으로 보면 아래와 같다.
 
 <img src="/images/2024-06-30-Transformer/image-20240630232834715.png" alt="image-20240630232834715" style="zoom:50%;" />
+
+이 Matrix를 통해 Z 값을 같는 수식을 표현하면 아래와 같다.
 
 <img src="/images/2024-06-30-Transformer/image-20240630232842185.png" alt="image-20240630232842185" style="zoom:50%;" />
 
 
 
+<img src="/images/2024-06-30-Transformer/image-20240630233601755.png" alt="image-20240630233601755" style="zoom:50%;" />
 
+각각의 $x$ 벡터에 대해 $q,k,v$가 계산을 할 수 있다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630233722978.png" alt="image-20240630233722978" style="zoom:50%;" />
+
+이를 바탕으로 첫번째 $q_1$에 대해 $k_1, k_2, k_3, k_4$에 대해 곱셈을 한 뒤에, Softmax를 취하여 가중치를 구한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630234251693.png" alt="image-20240630234251693" style="zoom:50%;" />
+
+이런 가중치를 value 값을 곱한 후, 합쳐서 $z_1$을 구한다.
+
+
+
+지금까지 구한 과정은 'single attention'이다.
+
+---
+
+'Multi-headed attention'은 다른 여러 개의 Attention Head을 사용한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630234531706.png" alt="image-20240630234531706" style="zoom:50%;" />
 
 
 
