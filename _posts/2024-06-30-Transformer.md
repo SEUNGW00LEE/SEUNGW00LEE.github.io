@@ -1,14 +1,10 @@
 ---
 layout: single
-title: "2. Transformer"
+title:"2.Transformer"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
 use_math: true
-
-
-
-
 ---
 
 ## Transformer
@@ -83,6 +79,76 @@ Imbedding된 단어들은 이제 Encoder의 2개의 Layer를 지나간다.
 위의 4차원 벡터들이 self-attention layer을 지나면 4차원의 벡터가 들어가는데, self-attention layer은 dependency가 있고, Feed-Forward는 dependency가 없다.
 
 
+
+<img src="/images/2024-06-30-Transformer/image-20240630213906963.png" alt="image-20240630213906963" style="zoom:50%;" />
+
+
+
+첫번째 encoder의 출력값인 r1과 r2는 두번째 encoder에 input으로 사용된다.
+
+
+
+## Self-Attention
+
+3가지의 벡터가 필요하다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630231504458.png" alt="image-20240630231504458" style="zoom:50%;" />
+
+- Query : 현재 보고 있는 단어의 representation, 다른 단어들을 score하기 위한 기준
+- Key : label, relevant word를 찾을 때 참고할 수 있는 폴더와 같은 역할
+- Value : 실제 값
+
+
+
+<img src="/images/2024-06-30-Transformer/image-20240630231714714.png" alt="image-20240630231714714" style="zoom:50%;" />
+
+
+
+**Step 1**
+
+$X_1$(1x4)과 $W^Q$(4x3)와 내적하여 $q_1$(1x3) ... 로 Queries, Keys, Values를 생성한다.
+
+일반적으로 input dimension보다는 Queries, Keys, Values의 dimension을 적게잡는다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630232044902.png" alt="image-20240630232044902" style="zoom:50%;" />
+
+**Step 2**
+
+현재 보고 있는 토큰의 Query($q_1$)와 나머지 key value($k_1, k_2$)를 곱해준다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630232208475.png" alt="image-20240630232208475" style="zoom:50%;" />
+
+**Step 3**
+
+$\sqrt{d_k}$를 Score에 나눠준다.
+
+**Step 4**
+
+이 값을 Softmax를 처리한다.
+
+해당 값은 현재 position의 단어가, 얼마나 중요한 역할을 하는가에 대한 지표
+
+<img src="/images/2024-06-30-Transformer/image-20240630232448126.png" alt="image-20240630232448126" style="zoom:50%;" />
+
+**Step 5**
+
+파랑색의 $v_1$은 원래의 $v_1$에 softmax를 곱한 값이고, 
+
+파랑색의 $v_2$은 원래의 $v_2$에 softmax를 곱한 값이다.
+
+**Step 6**
+
+z1 은 $v_1$과 $v_2$를 더한 값(가중 합이 된)이다.
+
+이 값이 self attention의 output이다.
+
+
+
+이를 Matrix calculation으로 보면
+
+<img src="/images/2024-06-30-Transformer/image-20240630232834715.png" alt="image-20240630232834715" style="zoom:50%;" />
+
+<img src="/images/2024-06-30-Transformer/image-20240630232842185.png" alt="image-20240630232842185" style="zoom:50%;" />
 
 
 
