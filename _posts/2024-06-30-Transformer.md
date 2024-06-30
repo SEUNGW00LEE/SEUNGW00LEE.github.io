@@ -174,13 +174,128 @@ $z_1$ 은 $v_1$과 $v_2$를 더한 값(가중 합이 된)이다.
 
 ---
 
+<img src="/images/2024-06-30-Transformer/image-20240630234845517.png" alt="image-20240630234845517" style="zoom:50%;" />
+
 'Multi-headed attention'은 다른 여러 개의 Attention Head을 사용한다.
+
+-> $z$값도 여러 값이 나온다.
 
 <img src="/images/2024-06-30-Transformer/image-20240630234531706.png" alt="image-20240630234531706" style="zoom:50%;" />
 
+모든 $z$값을 모두 concatenate한다.
+
+이 z값의 행의 갯수(24)와 같은 갯수의 column을 가지고, input embedding과 같은 차원의 행을 가지는 $W^0$를 설계한다.
+
+이를 통해 계산한다면, 처음 input embedding과 동일한 차원의 $Z$값을 산출할 수 있다.
+
+<img src="/images/2024-06-30-Transformer/image-20240630235205461.png" alt="image-20240630235205461" style="zoom:50%;" />
+
+이를 간략하게 보면 위와 같다.
+
+---
 
 
 
+<img src="/images/2024-06-30-Transformer/image-20240630235359557.png" alt="image-20240630235359557" style="zoom:50%;" />
+
+Encoder은 이렇게 Self-Attention한 결과에 대해서 Residual block을 'Add'하고, 'Normalize'한다.
+
+
+
+<img src="/images/2024-06-30-Transformer/image-20240630235615803.png" alt="image-20240630235615803" style="zoom:50%;" />
+
+Encoder 뿐만 아니라, Decoder에서도 Residual block을 'Add'하고, 'Normalize'한다.
+
+이 값을 마지막으로 encoder를 통과시키는 것은 Feed Forward Network이다.
+
+
+
+## Feed Forward
+
+<img src="/images/2024-06-30-Transformer/image-20240701000023709.png" alt="image-20240701000023709" style="zoom:50%;" />
+
+Feed Forward Network
+
+- Fully connected feed-forward network
+- Self Attention과 Residual block Add, Normalize가 끝난 z값을 Feed Forward에 통과시킨다.
+- 각각의 포지션에 대해 개별적으로 적용한다.
+
+$$
+FFN(x) = max(0,xW_1 + b_1)W_2 + b_2
+$$
+
+- 각각의 layer마다 다른 파라미터를 사용한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701003034398.png" alt="image-20240701003034398" style="zoom:50%;" />
+
+$z_1$과 $z_2$를 다른 neural network를 각각 이용한다.
+
+같은 block 내에서는 동일한 파라미터를 이용한다.
+
+($W_1$, $W_2$는 왼쪽, 오른쪽 같다.)
+
+<img src="/images/2024-06-30-Transformer/image-20240701003551940.png" alt="image-20240701003551940" style="zoom:50%;" />
+
+<img src="/images/2024-06-30-Transformer/image-20240701003636797.png" alt="image-20240701003636797" style="zoom:50%;" />
+
+결국은 convolution 연산의 개념을 도입하면 NN 계산을 빠르게 수행할 수 있다.
+
+---
+
+이제 Decoder에 대해서 보면
+
+<img src="/images/2024-06-30-Transformer/image-20240630193046123.png" alt="image-20240630193046123" style="zoom:25%;" />
+
+먼저 Masked Multi-Head Attention가 나온다.
+
+Decoder의 self attention은 반드시 자기 자신보다 앞쪽의 포지션에 대해서만 토큰들의 어텐션만 볼 수 있다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701004510994.png" alt="image-20240701004510994" style="zoom:50%;" />
+
+이를 수식적으로 표현하기 위해서 $-inf$로 masking해줘 softmax을 1,0으로 할당한다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701004605192.png" alt="image-20240701004605192" style="zoom:50%;" />
+
+이를 다른 그림으로 보면, 뒤의 score은 모두 0으로 할당된 것을 볼 수 있다.
+
+
+
+<img src="/images/2024-06-30-Transformer/image-20240701004644902.png" alt="image-20240701004644902" style="zoom:50%;" />
+
+
+
+<img src="/images/2024-06-30-Transformer/image-20240701004657169.png" alt="image-20240701004657169" style="zoom:50%;" />
+
+
+
+score에서 masking 된 부분이 모두 0으로 된 것을 볼 수 있다.
+
+<img src="/images/2024-06-30-Transformer/image-20240701004752540.png" alt="image-20240701004752540" style="zoom:50%;" />
+
+<img src="/images/2024-06-30-Transformer/image-20240701004811702.png" alt="image-20240701004811702" style="zoom:50%;" />
+
+decoder에서는 masking이 돼 값들이 sequencial 하게 들어가고, encoder의 k, v가 지속적으로 decoder의 attention score 값에 영향을 끼친다.
+
+
+
+총 3가지의 attention이 있는데,
+
+1. encoder 내부 self attention
+2. decoder 내부 masked self attention
+3. encoder의 output과 decoder과의 attention
+
+
+
+<img src="/images/2024-06-30-Transformer/image-20240701005018655.png" alt="image-20240701005018655" style="zoom:50%;" />
+
+이제 마지막의 Final Linear와 Softmax Layer를 살펴보자
+
+- Linear layer : a simple fully connected neural network that projects the vector produced by the stack of decoders into a much larger vector called a logits vector
+- Softmax layer : turns those scores into probability
+
+
+
+최종적으로 우리가 찾아야하는 단어가 무엇인지를 보여주는 과정이다.
 
 
 
