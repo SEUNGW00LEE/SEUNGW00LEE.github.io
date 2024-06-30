@@ -1,23 +1,45 @@
 ---
 layout: single
-title: "2.Transformer"
+title: "[Paper Review] Attention is all you need"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
 use_math: true
 ---
 
-## Transformer
+## Attention is all you need
 
 <img src="/images/2024-06-30-Transformer/image-20240628025940178.png" alt="image-20240628025940178"/>
 
+>***You got me looking for attention***
+>
+>...
+>
+>***Attention is what I want***
+
+**Attention is all you need**에서 가장 주목해야하는 점은
+
+-  어떻게 'RNN'을 사용하지않고 성능과 학습속도를 증가시켰는가?
+- Self-Attention이란 무엇인가?
+- 포지셔닝 인코딩이란 무엇인가?
+
+이다.
+
+
+
+아래는 위 질문에 대한 간략한 설명과, Attention is all you need에서 말하고자 하는 것을 시각화를 통해 요약하였다.
+
+---
+
+
+
 트랜스포머는 기존 encoder, decoder을 발전시킨 딥러닝 모델이다.
 
-가장 큰 차이점은 RNN을 사용하지않는 점이다.
+**가장 큰 차이점은 RNN을 사용하지않는 점이다.**
 
 기존 RNN을 사용하지 않고 학습이 빠르고 성능이 좋기에 큰 관심을 이끌었다.
 
-트랜스포머는 어떻게 더 빠르게 학습이 될 수 있을까에 대한 한마디 답은 병렬화이다.
+**트랜스포머는 어떻게 더 빠르게 학습이 될 수 있을까에 대한 한마디 답은 병렬화이다.**
 
 RNN이 순차적으로 첫번째부터 마지막까지 계산해 인코딩하는 반면 트랜스포머는 한번에 이 과정을 처리한다.
 
@@ -35,13 +57,13 @@ context vector의 크기가 고정이므로 input이 커질수록, 번역이 엉
 
 따라서 긴 문장의 번역 성능이 기존의 모델보다 상당히 성능이 좋아졌다.
 
-하지만 RNN을 순차적으로 계산하여 느리다는 점과, 성능의 한계를 보였다.
+**하지만 RNN을 순차적으로 계산하여 느리다는 점과, 성능의 한계를 보였다.**
 
-이 한계를 극복한 모델이 바로 Transformer이다.
+**이 한계를 극복한 모델이 바로 Transformer이다.**
 
 <img src="/images/2024-06-30-Transformer/image-20240701010045745.png" alt="image-20240701010045745" style="zoom:50%;" />
 
-RNN의 순차적인 계산은 트랜스포머의 행렬의 곱으로 해결했다.
+RNN의 순차적인 계산은 트랜스포머의 **행렬의 곱**으로 해결했다.
 
 또한 Transformer Decoder 연산과정은 어텐션 기반 encoder, decoder과 닮아있다.
 
@@ -53,7 +75,7 @@ RNN의 순차적인 계산은 트랜스포머의 행렬의 곱으로 해결했�
 
 RNN이 없는 트랜스포머는 어떻게 위치 정보를 처리할 수 있을까
 
-바로 포지셔닝 인코딩이다.
+바로 **포지셔닝 인코딩**이다.
 
 <img src="/images/2024-06-30-Transformer/image-20240701010338284.png" alt="image-20240701010338284" style="zoom:50%;" />
 
@@ -80,11 +102,11 @@ RNN이 없는 트랜스포머는 어떻게 위치 정보를 처리할 수 있을
 
 Decoder 역시 병렬식 처리를 적극 활용한다.
 
-<img src="/images/2024-06-30-Transformer/image-20240701011226792.png" alt="image-20240701011226792" style="zoom:50%;" />
 
-이때 Decoder의 softmax는 label smoothing을 적용하여 퍼포먼스를 높인다.
 
-이는 입력값이 Noisy한 경우 큰 도움을 주는데, 같은 데이터의 서로 다른 정답값이 one-hot encoding 처리가 될 때 label을 가림으로써 효율적인 학습을 기대할 수 있다.
+아래는 Attention is all you need의 자세한 설명이다.
+
+
 
 ---
 
@@ -117,6 +139,10 @@ Decoder은 Encoder-Decoder Attention 레이어가 추가되어 있다.
 Encoder Block이 왼쪽, Decoder Block이 오른쪽이다.
 
 Self Attention은 Single head attention이 아닌 Multi head attention이다.
+
+
+
+---
 
 
 
@@ -370,5 +396,5 @@ decoder에서는 masking이 돼 값들이 sequencial 하게 들어가고, encode
 
 최종적으로 우리가 찾아야하는 단어가 무엇인지를 보여주는 과정이다.
 
-
+<img src="/images/2024-06-30-Transformer/image-20240701011226792.png" alt="image-20240701011226792" style="zoom:50%;" />
 

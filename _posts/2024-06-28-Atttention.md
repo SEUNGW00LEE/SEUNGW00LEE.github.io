@@ -1,17 +1,11 @@
 ---
 layout: single
-title: "1. RNN & Seq2Seq"
+title: "RNN & Seq2Seq"
 categories: [AI, Transformer]
 tag: [RNN, Seq2Seq, Attention]
 typora-root-url: ../
 use_math: true
 ---
-
-**<img src="/images/2024-06-28-Atttention/image-20240628025940178.png" alt="image-20240628025940178"/>**
-
-> ***Attention is what I want***
-
-
 
 ## **RNN**
 
