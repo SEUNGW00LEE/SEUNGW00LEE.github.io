@@ -84,11 +84,9 @@ Decoder 역시 병렬식 처리를 적극 활용한다.
 
 이때 Decoder의 softmax는 label smoothing을 적용하여 퍼포먼스를 높인다.
 
-이는 입력값이 Noisy한 경우 큰 도움을 주는데, 같은 데이터의 서로 다른 정답값이 one-hot encoding 처리가 될 때 label을 가림으로써 학습에 용이하게 할 수 있다.
+이는 입력값이 Noisy한 경우 큰 도움을 주는데, 같은 데이터의 서로 다른 정답값이 one-hot encoding 처리가 될 때 label을 가림으로써 효율적인 학습을 기대할 수 있다.
 
 ---
-
-
 
 
 
