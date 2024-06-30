@@ -153,11 +153,11 @@ $$
 
 - **output으로 다른 sequence를 내놓는다.**
 
-- <video src="/../../Desktop/seq2seq_1.mp4"></video>
+- <video src="/../../Desktop/seq2seq/seq2seq_1.mp4"></video>
 
   **위처럼 세개의 item이 들어가도 4개의 item이 출력될 수 있다.**
 
-  <video src="/../../Desktop/seq2seq_2.mp4"></video>
+  <video src="/../../Desktop/seq2seq/seq2seq_2.mp4"></video>
 
   <img src="/images/2024-06-28-Atttention/image-20240630053332916.png" alt="image-20240630053332916" style="zoom:50%;" />
 
@@ -169,11 +169,13 @@ $$
 
   **아래 영상이 이를 잘 보여준다.**
 
-  <video src="/../../Desktop/seq2seq_5.mp4"></video>
+  <video src="/../../Desktop/seq2seq/seq2seq_5.mp4"></video>
+  
+  
 
 **이를 펼쳐서 보면 아래와 같다.**
 
-<video src="/../../Desktop/seq2seq_6.mp4"></video>
+<video src="/../../Desktop/seq2seq/seq2seq_6.mp4"></video>
 
 ### seq2seq의 문제점
 
@@ -205,7 +207,7 @@ $$
 
 **Attention이 가미된 Seq2Seq는 아래 그림과 같다.**
 
-<video src="/../../Desktop/seq2seq_7.mp4"></video>
+<video src="/../../Desktop/seq2seq/seq2seq_7.mp4"></video>
 
 
 
