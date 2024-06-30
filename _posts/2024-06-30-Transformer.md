@@ -9,6 +9,8 @@ use_math: true
 
 ## Transformer
 
+<img src="/images/2024-06-30-Transformer/image-20240628025940178.png" alt="image-20240628025940178"/>
+
 
 
 Transformer은 Attention을 이용해 한번의 하나의 토큰 씩 하는 것이 아닌 한꺼번에 정보를 처리한다.
