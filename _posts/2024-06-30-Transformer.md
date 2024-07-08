@@ -1,13 +1,13 @@
 ---
 layout: single
-title: "[Paper Review] Attention is all you need"
+title: "[Paper Review] Attention Is All You Need"
 categories: [AI, Paper Review]
 tag: []
 typora-root-url: ../
 use_math: true
 ---
 
-## Attention is all you need
+# Attention Is All You Need
 
 <img src="/images/2024-06-30-Transformer/image-20240628025940178.png" alt="image-20240628025940178"/>
 
@@ -17,7 +17,7 @@ use_math: true
 >
 >***Attention is what I want***
 
-**Attention is all you need**에서 가장 주목해야하는 점은
+**Attention Is All You Need**에서 가장 주목해야하는 점은
 
 -  어떻게 'RNN'을 사용하지않고 성능과 학습속도를 증가시켰는가?
 - Self-Attention이란 무엇인가?
@@ -28,6 +28,8 @@ use_math: true
 
 
 아래는 위 질문에 대한 간략한 설명과, Attention is all you need에서 말하고자 하는 것을 시각화를 통해 요약하였다.
+
+(Jay alamma에게 경의를!)
 
 ---
 
@@ -397,4 +399,22 @@ decoder에서는 masking이 돼 값들이 sequencial 하게 들어가고, encode
 최종적으로 우리가 찾아야하는 단어가 무엇인지를 보여주는 과정이다.
 
 <img src="/images/2024-06-30-Transformer/image-20240701011226792.png" alt="image-20240701011226792" style="zoom:50%;" />
+
+
+
+
+
+---
+
+<u>*Reference*</u>
+
+
+
+[Jay alamma - Visualizing A Neural Machine Translation Model (Mechanics of Seq2seq Models With Attention)](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/)
+
+[Jay alamma - The Illustrated GPT-2 (Visualizing Transformer Language Models)](https://jalammar.github.io/illustrated-gpt2/)
+
+[Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+
 
